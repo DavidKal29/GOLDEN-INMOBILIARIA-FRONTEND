@@ -1,0 +1,54 @@
+
+
+<template >
+  <div class="min-h-screen md:min-h-md w-full flex justify-center items-center lg:justify-start flex-col gap-4 relative overflow-hidden"  >
+    
+    <div class="flex justify-center items-center p-6">
+        <img src="/llave.gif" alt="llaves" class="w-[5rem]" >
+    </div>
+
+    <div class="flex justify-center itmes-center flex-col sm:flex-row p-4 gap-8 xl:gap-[5rem]">
+
+        <!-- Formulario de Login -->
+        <form action="" class="bg-[#123456] rounded-[10px] flex flex-col justify-center items-center gap-16 py-8 px-4 xl:w-[20rem]">
+            <p class="text-[30px] font-bold text-blue-200">LOGUEARME</p>
+            <div class="flex flex-col gap-8">
+                <input type="email" placeholder="Email" class="max-[360px]:w-[12rem] w-[16rem] text-center py-2 bg-white rounded-[10px] placeholder:text-gray-700 border-blue-300 border-3 placeholder:italic">
+                <input type="password" placeholder="Password" class="max-[360px]:w-[12rem] w-[16rem] text-center py-2 bg-white rounded-[10px] placeholder:text-gray-700 border-blue-300 border-3 placeholder:italic">
+            </div>
+            <button class="bg-red-500 text-white font-bold text-[15px] rounded w-[9rem] py-2">Acceder</button>
+            <p class="text-white font-semibold text-sm">¿No tienes cuenta? <a href="" class="text-red-500 font-semibold">Crear Cuenta</a></p>
+        </form>
+
+        <!-- Contenido de información -->
+         <InfoComponent></InfoComponent>
+        
+    </div>
+
+    <!-- Circulo -->
+    <div style="background: linear-gradient(to bottom, #000000, red);" class="hidden lg:block rounded-full w-[50rem] h-[50rem] z-[-1] absolute lg:bottom-[-20rem] lg:right-[-10rem]">
+        
+    </div>
+    
+  </div>
+</template>
+
+<script>
+import InfoComponent from '@/components/InfoComponent.vue';
+export default {
+    components:{
+        InfoComponent
+    }
+
+}
+</script>
+
+<style>
+
+    body{
+        background-image: url('/public/background.avif');
+        background-size: cover; 
+        background-repeat: no-repeat;
+        height: 100%;  
+    }     
+</style>
