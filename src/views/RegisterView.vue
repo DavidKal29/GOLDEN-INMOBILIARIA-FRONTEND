@@ -5,17 +5,20 @@
         <img src="/llave.gif" alt="llaves" class="w-[5rem]" >
     </div>
 
-    <div class="flex justify-center itmes-stretch flex-col sm:flex-row p-4 gap-8 xl:gap-[5rem]">
+    <div class="flex justify-center itmes-stretch flex-col sm:flex-row p-4 gap-8 xl:gap-[5rem] ">
 
-        <!-- Formulario de Login -->
-        <form action="" class="bg-[#123456] rounded-[10px] flex flex-col justify-center items-center gap-16 py-8 px-4 xl:w-[20rem] xl:h-[30rem]">
-            <p class="text-[30px] font-bold text-blue-200">SIGN IN</p>
+        <!-- Formulario de Register -->
+        <form action="" class="bg-[#123456] rounded-[10px] flex flex-col justify-center items-center gap-8 py-8 px-4 xl:w-[20rem] xl:h-[30rem]">
+            <p class="text-[30px] font-bold text-blue-200">SIGN UP</p>
             <div class="flex flex-col gap-8">
                 <input type="email" placeholder="Email" class="max-[360px]:w-[12rem] w-[16rem] text-center py-2 bg-white rounded-[10px] placeholder:text-gray-700 border-blue-300 border-3 placeholder:italic">
+                
+                <input type="text" placeholder="Username" class="max-[360px]:w-[12rem] w-[16rem] text-center py-2 bg-white rounded-[10px] placeholder:text-gray-700 border-blue-300 border-3 placeholder:italic">
+                
                 <input type="password" placeholder="Password" class="max-[360px]:w-[12rem] w-[16rem] text-center py-2 bg-white rounded-[10px] placeholder:text-gray-700 border-blue-300 border-3 placeholder:italic">
             </div>
-            <button class="bg-red-500 text-white font-bold text-[15px] rounded w-[9rem] py-2 cursor-pointer">Acceder</button>
-            <p class="text-white font-semibold text-sm">¿No tienes cuenta? <router-link to="/register" class="text-red-500 font-semibold">Crear Cuenta</router-link></p>
+            <button class="bg-red-500 text-white font-bold text-[15px] rounded w-[9rem] py-2 cursor-pointer">Crear Cuenta</button>
+            <p class="text-white font-semibold text-sm">¿Ya tienes cuenta? <router-link to="/login" class="text-red-500 font-semibold">Iniciar Sesión</router-link></p>
         </form>
 
         <!-- Contenido de información -->
