@@ -2,7 +2,7 @@
   <div class="min-h-screen md:min-h-md w-full flex lg:justify-start flex-col gap-4 relative overflow-hidden"  >
     
     <div class="flex justify-center items-center p-6">
-        <img src="/llave.gif" alt="llaves" class="w-[5rem]" >
+        <HomeLink></HomeLink>
     </div>
 
     <div class="flex justify-center itmes-stretch flex-col sm:flex-row p-4 gap-8 xl:gap-[5rem] ">
@@ -27,18 +27,21 @@
     </div>
 
     <!-- Circulo -->
-    <div style="background: linear-gradient(to bottom, #000000, red);" class="hidden lg:block rounded-full w-[50rem] h-[50rem] z-[-1] absolute lg:bottom-[-20rem] lg:right-[-10rem]">
+     <CircleComponent></CircleComponent>
         
-    </div>
     
   </div>
 </template>
 
 <script>
 import InfoComponent from '@/components/InfoComponent.vue';
+import CircleComponent from '@/components/CircleComponent.vue';
+import HomeLink from '@/components/links/HomeLink.vue';
 export default {
     components:{
-        InfoComponent
+        InfoComponent,
+        CircleComponent,
+        HomeLink
     }
 
 }
