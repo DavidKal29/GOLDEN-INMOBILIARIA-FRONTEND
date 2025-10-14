@@ -10,7 +10,7 @@
             <p class="text-sm">N de baños: 2</p>
             <p class="text-sm">Área: 300m2</p>
             <p class="text-sm">Venta: 250.000€ | Alquiler: 1200€</p>
-            <button class="bg-orange-500 text-white font-semibold italic rounded px-6 py-1 text-sm cursor-pointer">Solicitar Reserva</button>
+            <button class="bg-red-600 text-white font-semibold italic rounded px-6 py-1 text-sm cursor-pointer">Solicitar Reserva</button>
         </div>
     </div>
 </template>
