@@ -1,6 +1,7 @@
 <template >
   <div class="min-h-screen md:min-h-md w-full flex lg:justify-start flex-col gap-4 relative overflow-hidden"  >
     
+    
     <div class="flex justify-center items-center p-6">
         <HomeLink></HomeLink>
     </div>
@@ -37,6 +38,7 @@
 import InfoComponent from '@/components/InfoComponent.vue';
 import CircleComponent from '@/components/CircleComponent.vue';
 import HomeLink from '@/components/links/HomeLink.vue';
+import { toast } from 'vue-sonner';
 export default {
     components:{
         InfoComponent,
@@ -67,15 +69,15 @@ export default {
                     this.email = ''
                     this.username = ''
                     this.password = ''
-                    alert(data.success)
+                    toast.success(data.success)
                 }else{
                     console.log('Register ha devuelto error');
-                    alert(data.error)
+                    toast.error(data.error)
                 }
             })
             .catch(err=>{
                 console.log('Error al hacer fetch');
-                alert(err)
+                toast.error(err)
             })
 
         }
@@ -84,12 +86,3 @@ export default {
 }
 </script>
 
-<style>
-
-    body{
-        background-image: url('/public/background.avif');
-        background-size: cover; 
-        background-repeat: no-repeat;
-        height: 100%;  
-    }     
-</style>
