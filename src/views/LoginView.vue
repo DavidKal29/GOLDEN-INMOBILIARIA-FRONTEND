@@ -12,9 +12,9 @@
             <p class="text-[30px] font-bold text-blue-200">SIGN IN</p>
             <div class="flex flex-col gap-8">
                 
-                <input type="email" placeholder="Email" class="max-[360px]:w-[12rem] w-[16rem] text-center py-2 bg-white rounded-[10px] placeholder:text-gray-700 border-blue-300 border-3 placeholder:italic" v-model="email">
+                <input type="email" placeholder="Email" class="max-[360px]:w-[12rem] w-[16rem] text-center py-2 bg-white rounded-[10px] placeholder:text-gray-700 border-blue-300 border-3 placeholder:italic" v-model="email" required>
                 
-                <input type="password" placeholder="Password" class="max-[360px]:w-[12rem] w-[16rem] text-center py-2 bg-white rounded-[10px] placeholder:text-gray-700 border-blue-300 border-3 placeholder:italic" v-model="password">
+                <input type="password" placeholder="Password" class="max-[360px]:w-[12rem] w-[16rem] text-center py-2 bg-white rounded-[10px] placeholder:text-gray-700 border-blue-300 border-3 placeholder:italic" v-model="password" required>
             </div>
             <button class="bg-red-500 text-white font-bold text-[15px] rounded w-[9rem] py-2 cursor-pointer">Acceder</button>
             <p class="text-white font-semibold text-sm">¿No tienes cuenta? <router-link to="/register" class="text-red-500 font-semibold">Crear Cuenta</router-link></p>
@@ -52,7 +52,7 @@ export default {
         login(){
             const body = {email:this.email, password:this.password}
 
-            fetch('http://localhost:3000/login',{
+            fetch(`${process.env.VUE_APP_API_URL}/login`,{
                 method:'POST',
                 headers:{'Content-Type':'application/json'},
                 body:JSON.stringify(body),
