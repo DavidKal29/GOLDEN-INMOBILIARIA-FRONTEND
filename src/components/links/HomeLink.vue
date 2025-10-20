@@ -1,5 +1,5 @@
 <template>
-  <router-link to="/">
+  <router-link to="/home">
     <img src="/llave.gif" alt="llaves" class="w-[5rem]" >
   </router-link>
 </template>
