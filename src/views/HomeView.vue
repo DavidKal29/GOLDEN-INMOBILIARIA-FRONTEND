@@ -24,6 +24,7 @@
         <HouseTargetComponent></HouseTargetComponent>
         <HouseTargetComponent></HouseTargetComponent>
         <HouseTargetComponent></HouseTargetComponent>
+        
 
     </div>
 
