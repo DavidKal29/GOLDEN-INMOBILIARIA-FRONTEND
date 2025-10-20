@@ -8,7 +8,7 @@
         <div class=" w-full flex flex-col lg:flex-row gap-6 p-6 relative">
             
             <!-- Columna perfil -->
-            <div class="lg:w-1/4 bg-[#123456] text-white rounded-xl shadow-lg p-6 flex flex-col gap-6">
+            <div class="lg:w-1/4 bg-[#123456] text-white rounded-xl shadow-lg p-6 flex flex-col ">
 
                 <!-- si user es null -->
                 <div v-if="!user" class="flex items-center justify-center h-full italic text-gray-300">
@@ -16,7 +16,7 @@
                 </div>
 
                 <!-- si user existe -->
-                <div v-else>
+                <div v-else class="flex flex-col gap-4">
                     <p class="flex items-center text-[40px] font-bold">{{ user.username ? user.username : 'Sin especificar' }} </p>
                 
                     <!-- Info usuario -->
@@ -53,6 +53,13 @@
                             {{ user.description ? user.description : 'Sin descripción' }}
                         </p>
                     </div>
+
+                    <div class="flex  gap-4">
+                        <button class="bg-green-500 text-white font-bold text-[15px] rounded w-[9rem] py-2 cursor-pointer">Editar Perfil</button>
+
+                        <button @click="logout" class="bg-red-500 text-white font-bold text-[15px] rounded w-[9rem] py-2 cursor-pointer">Cerrar Sesión</button>
+                    </div>
+
                 </div>
 
             </div>
@@ -65,7 +72,7 @@
                         <div
                             v-for="(compra, index) in compras"
                             :key="index"
-                            class="bg-white rounded-xl shadow-lg overflow-hidden"
+                            class="bg-white rounded shadow-lg overflow-hidden"
                         >
                             <img :src="compra.imagen" alt="Inmueble" class="w-full h-48 object-cover" />
                             <div class="p-4 flex flex-col gap-2">
@@ -86,6 +93,7 @@
 
 <script>
 import HomeLink from '@/components/links/HomeLink.vue';
+import { toast } from 'vue-sonner';
 export default {
     components:{
         HomeLink
@@ -114,6 +122,22 @@ export default {
                     this.$router.push('/')
                 }else{
                     this.user = data.user 
+                }
+                
+            })
+            .catch(err=>{console.error(err);})
+        },
+        logout(){
+            fetch(`${process.env.VUE_APP_API_URL}/logout`,{
+                method:'GET',
+                credentials:'include'
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                if (data.success) {
+                    this.$router.push('/')
+                }else{
+                    toast.error(data.error)
                 }
                 
             })
