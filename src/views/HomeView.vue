@@ -12,10 +12,7 @@
         <div v-else>
             <LoginLink></LoginLink>
         </div>
-        
-
-        
-        
+         
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 justify-center items-center w-fit mx-auto gap-16 lg:gap-8 xl:gap-24">

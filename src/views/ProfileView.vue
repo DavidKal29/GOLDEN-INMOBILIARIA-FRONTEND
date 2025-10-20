@@ -55,7 +55,7 @@
                     </div>
 
                     <div class="flex  gap-4">
-                        <button class="bg-green-500 text-white font-bold text-[15px] rounded w-[9rem] py-2 cursor-pointer">Editar Perfil</button>
+                        <RouterLink to="/profile/editProfile" class="text-center bg-green-500 text-white font-bold text-[15px] rounded w-[9rem] py-2 cursor-pointer">Editar Perfil</RouterLink>
 
                         <button @click="logout" class="bg-red-500 text-white font-bold text-[15px] rounded w-[9rem] py-2 cursor-pointer">Cerrar Sesión</button>
                     </div>

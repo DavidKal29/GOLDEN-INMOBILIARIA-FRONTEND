@@ -11,11 +11,11 @@
         <form @submit.prevent="register" action="" class="bg-[#123456] rounded-[10px] flex flex-col justify-center items-center gap-8 py-8 px-4 xl:w-[20rem] xl:h-[30rem]">
             <p class="text-[30px] font-bold text-blue-200">SIGN UP</p>
             <div class="flex flex-col gap-8">
-                <input type="email" placeholder="Email" class="max-[360px]:w-[12rem] w-[16rem] text-center py-2 bg-white rounded-[10px] placeholder:text-gray-700 border-blue-300 border-3 placeholder:italic" v-model="email" required>
+                <input name="email" type="email" placeholder="Email" class="max-[360px]:w-[12rem] w-[16rem] text-center py-2 bg-white rounded-[10px] placeholder:text-gray-700 border-blue-300 border-3 placeholder:italic" v-model="email" required>
                 
-                <input type="text" placeholder="Username" class="max-[360px]:w-[12rem] w-[16rem] text-center py-2 bg-white rounded-[10px] placeholder:text-gray-700 border-blue-300 border-3 placeholder:italic" v-model="username" required>
+                <input name="text" type="text" placeholder="Username" class="max-[360px]:w-[12rem] w-[16rem] text-center py-2 bg-white rounded-[10px] placeholder:text-gray-700 border-blue-300 border-3 placeholder:italic" v-model="username" required>
                 
-                <input type="password" placeholder="Password" class="max-[360px]:w-[12rem] w-[16rem] text-center py-2 bg-white rounded-[10px] placeholder:text-gray-700 border-blue-300 border-3 placeholder:italic" v-model="password" required>
+                <input name="password" type="password" placeholder="Password" class="max-[360px]:w-[12rem] w-[16rem] text-center py-2 bg-white rounded-[10px] placeholder:text-gray-700 border-blue-300 border-3 placeholder:italic" v-model="password" required>
             </div>
             <button class="bg-red-500 text-white font-bold text-[15px] rounded w-[9rem] py-2 cursor-pointer">Crear Cuenta</button>
             <p class="text-white font-semibold text-sm">¿Ya tienes cuenta? <router-link to="/" class="text-red-500 font-semibold">Iniciar Sesión</router-link></p>
