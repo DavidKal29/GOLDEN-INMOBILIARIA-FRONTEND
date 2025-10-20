@@ -50,6 +50,20 @@ export default {
         }
     },
     methods:{
+        getProfile(){
+            fetch(`${process.env.VUE_APP_API_URL}/profile`,{
+                method:'GET',
+                credentials:'include'
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                if (data.user) {
+                    this.$router.push('/profile')
+                }
+                
+            })
+            .catch(err=>{console.error(err);})
+        },
         login(){
             const body = {email:this.email, password:this.password}
 
@@ -66,7 +80,8 @@ export default {
                     this.email = ''
                     this.username = ''
                     this.password = ''
-                    toast.success(data.success)
+
+                    this.$router.push('/profile')
                 }else{
                     console.log('Login ha devuelto error');
                     toast.error(data.error)
@@ -78,6 +93,9 @@ export default {
             })
 
         }
+    },
+    mounted(){
+        this.getProfile()
     }
 
 

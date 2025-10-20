@@ -31,6 +31,32 @@ import HomeLink from '@/components/links/HomeLink.vue';
 export default {
     components:{
         HomeLink
+    },
+    data(){
+        return {
+            user:null
+        }
+    },
+    methods:{
+        getProfile(){
+            fetch(`${process.env.VUE_APP_API_URL}/profile`,{
+                method:'GET',
+                credentials:'include'
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                if (data.error) {
+                    this.$router.push('/')
+                }else{
+                    this.user = data.user
+                }
+                
+            })
+            .catch(err=>{console.error(err);})
+        }
+    },
+    mounted(){
+        this.getProfile()
     }
 
 }
