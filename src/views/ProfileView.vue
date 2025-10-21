@@ -123,7 +123,7 @@
                         Usuarios
                     </RouterLink>
 
-                    <RouterLink to="/home" class="bg-red-500 transition-colors text-white font-bold py-3 px-6 rounded-md">
+                    <RouterLink to="/admin/houses" class="bg-red-500 transition-colors text-white font-bold py-3 px-6 rounded-md">
                         Inmuebles
                     </RouterLink>
 
