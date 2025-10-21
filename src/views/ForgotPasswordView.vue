@@ -7,26 +7,16 @@
 
     <div class="flex justify-center itmes-stretch flex-col sm:flex-row p-4 gap-8 xl:gap-[5rem]">
 
-        <!-- Formulario de Login -->
-        <form @submit.prevent="login" action="" class="bg-[#123456] rounded-[10px] flex flex-col justify-center items-center gap-12 py-8 px-4 xl:w-[20rem] xl:h-[30rem]">
-            <p class="text-[30px] font-bold text-blue-200">SIGN IN</p>
+        <!-- Formulario de Forgot Password -->
+        <form @submit.prevent="sendEmail" action="" class="bg-[#123456] rounded-[10px] flex flex-col justify-center items-center gap-16 py-8 px-4 xl:w-[20rem] xl:h-[30rem]">
+            <p class="text-[30px] font-bold text-blue-200">FORGOTEEN</p>
             <div class="flex flex-col gap-8">
                 
                 <input name="email" type="email" placeholder="Email" class="max-[360px]:w-[12rem] w-[16rem] text-center py-2 bg-white rounded-[10px] placeholder:text-gray-700 border-blue-300 border-3 placeholder:italic" v-model="email" required>
-                
-                <input name="password" type="password" placeholder="Password" class="max-[360px]:w-[12rem] w-[16rem] text-center py-2 bg-white rounded-[10px] placeholder:text-gray-700 border-blue-300 border-3 placeholder:italic" v-model="password" required>
-            </div>
-
-            
-            <button class="bg-red-500 text-white font-bold text-[15px] rounded w-[9rem] py-2 cursor-pointer">Acceder</button>
-            
-            <div class="flex flex-col gap-4 text-center">
-                <p class="text-white font-semibold text-sm">¿No tienes cuenta? <router-link to="/register" class="text-red-500 font-semibold">Crear Cuenta</router-link></p>
-
-                <p class="text-white font-semibold text-sm">¿Olvidaste la contraseña? <router-link to="/forgotPassword" class="text-red-500 font-semibold">Recuperar aquí</router-link></p>
             
             </div>
-            
+            <button class="bg-red-500 text-white font-bold text-[15px] rounded w-[9rem] py-2 cursor-pointer">Enviar Email</button>
+            <p class="text-white font-semibold text-sm">¿Recordaste la contraseña? <router-link to="/" class="text-red-500 font-semibold">Iniciar Sesión</router-link></p>
         </form>
 
         <!-- Contenido de información -->
@@ -55,7 +45,6 @@ export default {
     data(){
         return {
             email:'',
-            password:'',
             csrfToken:''
         }
     },
@@ -74,10 +63,10 @@ export default {
             })
             .catch(err=>{console.error(err);})
         },
-        login(){
-            const body = {email:this.email, password:this.password}
+        sendEmail(){
+            const body = {email:this.email}
 
-            fetch(`${process.env.VUE_APP_API_URL}/login`,{
+            fetch(`${process.env.VUE_APP_API_URL}/forgotPassword`,{
                 method:'POST',
                 headers:{'Content-Type':'application/json', 'CSRF-Token':this.csrfToken},
                 body:JSON.stringify(body),
@@ -86,14 +75,14 @@ export default {
             .then(res=>res.json())
             .then(data=>{
                 if (data.success) {
-                    console.log('Login ha devuelto exito');
+                    console.log('Forgot Password ha devuelto exito');
                     this.email = ''
-                    this.username = ''
-                    this.password = ''
 
-                    this.$router.push('/profile')
+                    toast.success(data.success)
                 }else{
                     console.log('Login ha devuelto error');
+                    console.log(data.error);
+                    
                     toast.error(data.error)
                 }
             })
@@ -128,4 +117,3 @@ export default {
 
 }
 </script>
-

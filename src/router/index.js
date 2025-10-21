@@ -5,6 +5,7 @@ import HomeView from '@/views/HomeView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import EditProfileView from '@/views/EditProfileView.vue'
 import HouseView from '@/views/HouseView.vue'
+import ForgotPasswordView from '@/views/ForgotPasswordView.vue'
 
 const routes = [
   {
@@ -37,6 +38,11 @@ const routes = [
     name: 'house',
     component: HouseView
   },
+  {
+    path: '/forgotPassword',
+    name: 'forgotPassword',
+    component: ForgotPasswordView
+  }
   
 ]
 
