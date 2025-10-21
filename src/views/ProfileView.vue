@@ -71,7 +71,7 @@
             </div>
 
             <!-- Columna compras -->
-            <div class="lg:w-3/4 flex flex-col gap-4">
+            <div v-if="user?.rol != 'admin'" class="lg:w-3/4 flex flex-col gap-4">
 
                 <div class=" max-h-[500px] overflow-y-auto pr-2">
 
@@ -107,6 +107,32 @@
             
             </div>
 
+
+            <!-- Div que solo aparece cuando el usuario es admin -->
+            <div v-else class="lg:w-3/4 flex flex-col items-center justify-center text-center bg-[#123456] text-white rounded-xl p-8">
+                <p class="text-xl md:text-2xl font-semibold mb-4">
+                    BIENVENIDO AL PANEL DEL ADMINISTRADOR
+                </p>
+                        
+                <p class="mb-6 text-gray-300">
+                    Tienes acceso, tanto a la lista oficial de usuarios registrados, como a la lista de inmuebles registrados en esta web. Además, también podrás añadir nuevos inmuebles para aumentar aún más el catálogo de viviendas.
+                </p>
+                
+                <div class="flex justify-center items-center gap-4">
+                    <RouterLink to="/home" class="bg-blue-500 transition-colors text-white font-bold py-3 px-6 rounded-md">
+                        Usuarios
+                    </RouterLink>
+
+                    <RouterLink to="/home" class="bg-red-500 transition-colors text-white font-bold py-3 px-6 rounded-md">
+                        Inmuebles
+                    </RouterLink>
+
+                    <RouterLink to="/home" class="bg-green-500 transition-colors text-white font-bold py-3 px-6 rounded-md">
+                        Añadir Inmueble
+                    </RouterLink>
+                </div>
+            </div>
+        
         </div>
 
         <CircleComponent></CircleComponent>
