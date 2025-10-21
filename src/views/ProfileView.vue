@@ -8,7 +8,7 @@
         <div class=" w-full flex flex-col lg:flex-row gap-6 p-6 relative">
             
             <!-- Columna perfil -->
-            <div class="lg:w-1/4 bg-[#123456] text-white rounded-xl shadow-lg p-6 flex flex-col ">
+            <div class="lg:w-1/4 bg-[#123456] text-white rounded-xl shadow-lg p-6 flex flex-col overflow-hidden">
 
                 <!-- si user es null -->
                 <div v-if="!user" class="flex items-center justify-center h-full italic text-gray-300">
@@ -17,29 +17,31 @@
 
                 <!-- si user existe -->
                 <div v-else class="flex flex-col gap-4">
-                    <p class="flex items-center text-[40px] font-bold">{{ user.username ? user.username : 'Sin especificar' }} </p>
+
+                    <p class="flex items-center text-[30px] font-bold break-words">
+                        {{ user.username ? user.username : 'Sin especificar' }}
+                    </p>
                 
                     <!-- Info usuario -->
-                    <div class="flex flex-col gap-2 text-base">
+                    <div class="flex flex-col gap-2 text-base break-words">
                         <h3 class="font-semibold mb-1">Información</h3>
                         
-                        <p class="flex items-center">
+                        <p class="flex items-center break-words">
                             <i class="fas fa-envelope mr-2"></i>
                             {{ user.email ? user.email : 'Sin especificar' }}
                         </p>
                         
-                        <p class="flex items-center">
+                        <p class="flex items-center break-words">
                             <i class="fas fa-phone mr-2"></i>
                             {{ user.phone ? user.phone : 'Sin especificar' }}
                         </p>
 
-                        <p class="flex items-center">
+                        <p class="flex items-center break-words">
                             <i class="fas fa-calendar-alt mr-2"></i>
                             {{ user.fecha_Registro ? user.fecha_Registro : 'Sin especificar' }}
                         </p>
                     
-                        
-                        <p class="flex items-center">
+                        <p class="flex items-center break-words">
                             <i class="fas fa-user-tag mr-2"></i>
                             {{ user.rol ? user.rol : 'Sin especificar' }}
                         </p>
@@ -47,17 +49,21 @@
                     </div>
 
                     <!-- Descripción -->
-                    <div class="mt-4">
+                    <div class="mt-4 leading-relaxed break-words whitespace-pre-wrap">
                         <h3 class="font-semibold mb-1">Descripción</h3>
-                        <p class="text-gray-300 italic">
+                        <p class="text-gray-300 italic break-words">
                             {{ user.description ? user.description : 'Sin descripción' }}
                         </p>
                     </div>
 
-                    <div class="flex  gap-4">
-                        <RouterLink to="/profile/editProfile" class="text-center bg-green-500 text-white font-bold text-[15px] rounded w-[9rem] py-2 cursor-pointer">Editar Perfil</RouterLink>
+                    <div class="flex gap-4 flex-wrap">
+                        <RouterLink to="/profile/editProfile" class="text-center bg-green-500 text-white font-bold text-[15px] rounded w-[9rem] py-2 cursor-pointer truncate">
+                            Editar Perfil
+                        </RouterLink>
 
-                        <button @click="logout" class="bg-red-500 text-white font-bold text-[15px] rounded w-[9rem] py-2 cursor-pointer">Cerrar Sesión</button>
+                        <button @click="logout" class="bg-red-500 text-white font-bold text-[15px] rounded w-[9rem] py-2 cursor-pointer truncate">
+                            Cerrar Sesión
+                        </button>
                     </div>
 
                 </div>

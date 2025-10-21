@@ -87,6 +87,8 @@ export default {
                     this.$router.push('/profile')
                 }else{
                     console.log('Register ha devuelto error');
+                    console.log(data.error);
+                    
                     toast.error(data.error)
                 }
             })
