@@ -46,7 +46,8 @@ export default {
     data(){
         return {
             email:'',
-            password:''
+            password:'',
+            csrfToken:''
         }
     },
     methods:{
@@ -69,7 +70,7 @@ export default {
 
             fetch(`${process.env.VUE_APP_API_URL}/login`,{
                 method:'POST',
-                headers:{'Content-Type':'application/json'},
+                headers:{'Content-Type':'application/json', 'CSRF-Token':this.csrfToken},
                 body:JSON.stringify(body),
                 credentials:'include'
             })
@@ -89,12 +90,29 @@ export default {
             })
             .catch(err=>{
                 console.log('Error al hacer fetch');
-                toast.error(err)
+                console.log(err);
+                toast.error('Error al enviar datos')
             })
 
+        },
+        getCSRFToken(){
+            fetch(`${process.env.VUE_APP_API_URL}/csrf-token`,{
+                method:'GET',
+                credentials:'include'
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                this.csrfToken = data.csrfToken
+            })
+            .catch(err=>{
+                console.log('Error al hacer fetch');
+                console.log(err);
+                toast.error('Error al obtener el csrfToken')
+            })
         }
     },
     mounted(){
+        this.getCSRFToken()
         this.getProfile()
     }
 
