@@ -10,7 +10,8 @@
             <p class="text-sm">N de baños: {{ house.bathrooms }}</p>
             <p class="text-sm">Área: {{ house.area_m2 }} m2</p>
             <p class="text-sm">Precio: {{ house.price }} €</p>
-            <router-link :to="`/house/${house._id}`" class="bg-red-600 text-white font-semibold italic rounded px-6 py-1 text-sm cursor-pointer">Solicitar Reserva</router-link>
+            <router-link v-if="isAdmin" :to="`/house/${house._id}`" class="bg-green-600 text-white font-semibold italic rounded px-6 py-1 text-sm cursor-pointer">Editar</router-link>
+            <router-link v-else :to="`/house/${house._id}`" class="bg-red-600 text-white font-semibold italic rounded px-6 py-1 text-sm cursor-pointer">Solicitar Reserva</router-link>
         </div>
     </div>
 </template>
@@ -20,6 +21,10 @@ export default {
     props:{
         house:{
             type:Object,
+            required:true
+        },
+        isAdmin:{
+            type:Boolean,
             required:true
         }
     }

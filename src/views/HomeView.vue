@@ -21,12 +21,12 @@
         <button @click="changeCategory('castle')" :class="['hover:bg-red-500 duration-600 cursor-pointer text-white rounded px-4 py-2 text-center w-full xl:w-1/4',category === 'castle' ? 'bg-orange-500' : 'bg-blue-900']">Castillos Antiguos</button>
     </div>
 
-    <div  class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 justify-center items-center w-fit mx-auto gap-16 lg:gap-8 xl:gap-24 max-h-[500px] md:max-h-[1000px] xl:max-h-[600px] overflow-y-auto mb-12">
+    <div v-if="user?.rol === 'admin'" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 justify-center items-center w-fit mx-auto gap-16 lg:gap-8 xl:gap-24 max-h-[500px] md:max-h-[1000px] xl:max-h-[600px] overflow-y-auto mb-12">
+        <HouseTargetComponent  v-for="house in houses" :key="house._id" :house="house" :isAdmin="true" ></HouseTargetComponent>
+    </div>
 
-        <HouseTargetComponent v-for="house in houses" :key="house._id" :house="house"></HouseTargetComponent>
-        
-        
-
+    <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 justify-center items-center w-fit mx-auto gap-16 lg:gap-8 xl:gap-24 max-h-[500px] md:max-h-[1000px] xl:max-h-[600px] overflow-y-auto mb-12">
+        <HouseTargetComponent  v-for="house in houses" :key="house._id" :house="house" :isAdmin="false" ></HouseTargetComponent>
     </div>
 
     

@@ -86,6 +86,10 @@ export default {
                 if (!data.user) {
                     this.$router.push('/')
                 }
+
+                if (data.user && data.user.rol === 'admin') {
+                    this.$router.push('/home')
+                }
                 
                 
             })
