@@ -74,46 +74,62 @@
             <div class="lg:w-3/4 flex flex-col gap-4">
 
                 <div class=" max-h-[500px] overflow-y-auto pr-2">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                    <!-- Si houses existe y tiene elementos -->
+                    <div v-if="houses && houses.length > 0" class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div
-                            v-for="(compra, index) in compras"
+                            v-for="(house, index) in houses"
                             :key="index"
                             class="bg-white rounded shadow-lg overflow-hidden"
                         >
-                            <img :src="compra.imagen" alt="Inmueble" class="w-full h-48 object-cover" />
+                            <img :src="house.image" alt="Inmueble" class="w-full h-48 object-cover" />
                             <div class="p-4 flex flex-col gap-2">
-                                <p class="font-semibold flex items-center"><i class="fas fa-map-marker-alt mr-2"></i>{{ compra.ubicacion }}</p>
-                                <p class=" flex items-center"><i class="fas fa-euro-sign mr-2"></i>{{ compra.precio }}</p>
+                                <p class="font-semibold flex items-center"><i class="fas fa-map-marker-alt mr-2"></i>{{ house.address }}</p>
+                                <p class=" flex items-center"><i class="fas fa-euro-sign mr-2"></i>{{ house.price }}</p>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Si no hay houses -->
+                    <div v-else class="flex flex-col items-center justify-center text-center bg-[#123456] text-white rounded-xl p-8">
+                        <p class="text-xl md:text-2xl font-semibold mb-4">
+                            En este momento no tienes casas
+                        </p>
+                        <p class="mb-6 text-gray-300">
+                            Parece que todavía no has explorado el mercado inmobiliario. No te preocupes, este es el momento perfecto para empezar a descubrir las mejores propiedades. Puedes buscar, comparar y elegir tu primera casa o apartamento y empezar a construir tu portafolio de inmuebles. ¡Cada propiedad que agregues te acercará más a tu objetivo de inversión y confort!
+                        </p>
+                        <RouterLink to="/home" class="bg-blue-500 transition-colors text-white font-bold py-3 px-6 rounded-md">
+                            Ir a Home
+                        </RouterLink>
+                    </div>
+                
                 </div>
             
             </div>
 
         </div>
+
+        <CircleComponent></CircleComponent>
     
     </div>
 
 </template>
 
+
 <script>
 import HomeLink from '@/components/links/HomeLink.vue';
 import { toast } from 'vue-sonner';
+import CircleComponent from '@/components/CircleComponent.vue';
 export default {
     components:{
-        HomeLink
+        HomeLink,
+        CircleComponent
     },
     data() {
         return {
             user: null,
-            compras: [
-                { imagen: 'https://i.ytimg.com/vi/aiyyNslpWRA/sddefault.jpg', ubicacion: 'CALLE PRIMAVERA 123, JARDÍN', precio: '250 000€' },
-                { imagen: 'https://i.ytimg.com/vi/aiyyNslpWRA/sddefault.jpg', ubicacion: 'AVENIDA SOL 45, CENTRO', precio: '320 000€' },
-                { imagen: 'https://i.ytimg.com/vi/aiyyNslpWRA/sddefault.jpg', ubicacion: 'PLAZA LUNA 7, NORTE', precio: '180 000€' },
-                { imagen: 'https://i.ytimg.com/vi/aiyyNslpWRA/sddefault.jpg', ubicacion: 'CALLE ROSA 9, SUR', precio: '210 000€' },
-                { imagen: 'https://i.ytimg.com/vi/aiyyNslpWRA/sddefault.jpg', ubicacion: 'AVENIDA CIELO 11, ESTE', precio: '400 000€' },
-            ]
+            houses: [],
+            
         }
     },
     methods:{
@@ -149,9 +165,34 @@ export default {
             })
             .catch(err=>{console.error(err);})
         },
+        getMyHouses(){
+            fetch(`${process.env.VUE_APP_API_URL}/getMyHouses`,{
+                method:'GET',
+                credentials:'include'
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                if (data.houses) {
+                    console.log('Get houses ha devuelto las casas');
+
+                    this.houses = data.houses
+
+                    console.log(data.house);
+                    
+                }else{
+                    if (data.error) {
+                        console.log('Get Houses ha devuleto error');
+                        
+                        toast.error(data.error)
+                    }
+                }    
+            })
+            .catch(err=>{console.error(err);})
+        },
     },
     mounted(){
         this.getProfile()
+        this.getMyHouses()
     }
 };
 </script>
