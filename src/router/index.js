@@ -6,6 +6,7 @@ import ProfileView from '@/views/ProfileView.vue'
 import EditProfileView from '@/views/EditProfileView.vue'
 import HouseView from '@/views/HouseView.vue'
 import ForgotPasswordView from '@/views/ForgotPasswordView.vue'
+import ChangePasswordView from '@/views/ChangePasswordView.vue'
 
 const routes = [
   {
@@ -42,6 +43,11 @@ const routes = [
     path: '/forgotPassword',
     name: 'forgotPassword',
     component: ForgotPasswordView
+  },
+  {
+    path: '/changePassword/:token',
+    name: 'changePassword',
+    component: ChangePasswordView
   }
   
 ]

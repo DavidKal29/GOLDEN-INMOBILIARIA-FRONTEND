@@ -7,16 +7,18 @@
 
     <div class="flex justify-center itmes-stretch flex-col sm:flex-row p-4 gap-8 xl:gap-[5rem]">
 
-        <!-- Formulario de Forgot Password -->
-        <form @submit.prevent="sendEmail" action="" class="bg-[#123456] rounded-[10px] flex flex-col justify-center items-center gap-16 py-8 px-4 xl:w-[20rem] xl:h-[30rem]">
-            <p class="text-[30px] font-bold text-blue-200">FORGOTEEN</p>
+        <!-- Formulario de Change Password -->
+        <form @submit.prevent="changePassword" action="" class="bg-[#123456] rounded-[10px] flex flex-col justify-center items-center gap-16 py-8 px-4 xl:w-[20rem] xl:h-[30rem]">
+            <p class="text-[30px] font-bold text-blue-200">CHANGE</p>
             <div class="flex flex-col gap-8">
                 
-                <input name="email" type="email" placeholder="Email" class="max-[360px]:w-[12rem] w-[16rem] text-center py-2 bg-white rounded-[10px] placeholder:text-gray-700 border-blue-300 border-3 placeholder:italic" v-model="email" required>
+                <input name="new_password" type="password" autocomplete="off" placeholder="Nueva contraseña" class="max-[360px]:w-[12rem] w-[16rem] text-center py-2 bg-white rounded-[10px] placeholder:text-gray-700 border-blue-300 border-3 placeholder:italic" v-model="new_passsword" required>
+
+                <input name="confirm_password" type="password" autocomplete="off" placeholder="Confirmar contraseña" class="max-[360px]:w-[12rem] w-[16rem] text-center py-2 bg-white rounded-[10px] placeholder:text-gray-700 border-blue-300 border-3 placeholder:italic" v-model="confirm_password" required>
             
             </div>
-            <button class="bg-red-500 text-white font-bold text-[15px] rounded w-[9rem] py-2 cursor-pointer">Enviar Email</button>
-            <p class="text-white font-semibold text-sm">¿Recordaste la contraseña? <router-link to="/" class="text-red-500 font-semibold">Iniciar Sesión</router-link></p>
+            <button class="bg-red-500 text-white font-bold text-[15px] rounded w-[9rem] py-2 cursor-pointer">Cambiar</button>
+            <p class="text-white font-semibold text-sm">¿Cambiaste la contraseña? <router-link to="/" class="text-red-500 font-semibold">Iniciar Sesión</router-link></p>
         </form>
 
         <!-- Contenido de información -->
@@ -44,7 +46,8 @@ export default {
     },
     data(){
         return {
-            email:'',
+            new_passsword:'',
+            confirm_password:'',
             csrfToken:''
         }
     },
@@ -63,10 +66,10 @@ export default {
             })
             .catch(err=>{console.error(err);})
         },
-        sendEmail(){
-            const body = {email:this.email}
+        changePassword(){
+            const body = {new_password: this.new_passsword, confirm_password: this.confirm_password}
 
-            fetch(`${process.env.VUE_APP_API_URL}/forgotPassword`,{
+            fetch(`${process.env.VUE_APP_API_URL}/changePassword/${this.$route.params.token}`,{
                 method:'POST',
                 headers:{'Content-Type':'application/json', 'CSRF-Token':this.csrfToken},
                 body:JSON.stringify(body),
@@ -75,12 +78,12 @@ export default {
             .then(res=>res.json())
             .then(data=>{
                 if (data.success) {
-                    console.log('Forgot Password ha devuelto exito');
-                    this.email = ''
+                    console.log('Change Password ha devuelto exito');
 
                     toast.success(data.success)
                 }else{
-                    console.log('Forgot Password ha devuelto error');
+                    console.log('Change Password ha devuelto error');
+                    
                     console.log(data.error);
                     
                     toast.error(data.error)
