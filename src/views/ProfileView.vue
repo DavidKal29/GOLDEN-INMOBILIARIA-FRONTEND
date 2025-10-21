@@ -118,8 +118,8 @@
                     Tienes acceso, tanto a la lista oficial de usuarios registrados, como a la lista de inmuebles registrados en esta web. Además, también podrás añadir nuevos inmuebles para aumentar aún más el catálogo de viviendas.
                 </p>
                 
-                <div class="flex justify-center items-center gap-4">
-                    <RouterLink to="/home" class="bg-blue-500 transition-colors text-white font-bold py-3 px-6 rounded-md">
+                <div class="flex justify-center flex-col md:flex-row items-center gap-4">
+                    <RouterLink to="/admin/users" class="bg-blue-500 transition-colors text-white font-bold py-3 px-6 rounded-md">
                         Usuarios
                     </RouterLink>
 

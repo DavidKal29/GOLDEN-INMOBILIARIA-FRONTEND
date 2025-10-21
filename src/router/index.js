@@ -7,6 +7,7 @@ import EditProfileView from '@/views/EditProfileView.vue'
 import HouseView from '@/views/HouseView.vue'
 import ForgotPasswordView from '@/views/ForgotPasswordView.vue'
 import ChangePasswordView from '@/views/ChangePasswordView.vue'
+import AdminUsersView from '@/views/AdminUsersView.vue'
 
 const routes = [
   {
@@ -48,6 +49,11 @@ const routes = [
     path: '/changePassword/:token',
     name: 'changePassword',
     component: ChangePasswordView
+  },
+  {
+    path: '/admin/users',
+    name: 'adminUsers',
+    component: AdminUsersView
   }
   
 ]
