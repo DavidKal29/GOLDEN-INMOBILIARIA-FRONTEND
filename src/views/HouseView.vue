@@ -7,20 +7,20 @@
 
     <div class="flex justify-center items-center flex-col sm:flex-row p-4 gap-8 lg:gap-[5rem]">
 
-        <!-- Formulario de Login -->
-        <form @submit.prevent="login" action="" class="bg-[#123456] rounded-[10px] flex flex-col justify-center items-center gap-8 py-8 px-4 max-[360px]:w-[18rem] w-[21rem] sm:h-[35rem] lg:h-[35rem]  xl:w-[20rem] xl:h-[35rem]">
+        <!-- Formulario de Buy House -->
+        <form @submit.prevent="buyHouse" action="" class="bg-[#123456] rounded-[10px] flex flex-col justify-center items-center gap-8 py-8 px-4 max-[360px]:w-[18rem] w-[21rem] sm:h-[35rem] lg:h-[35rem]  xl:w-[20rem] xl:h-[35rem]">
             <p class="text-[30px] font-bold text-blue-200">BUY HOUSE</p>
             <div class="flex flex-col gap-6">
                 
-                <input name="nombre_titular" type="text" placeholder="Nombre Titular" class="max-[360px]:w-[12rem] w-[16rem] text-center py-2 bg-white rounded-[10px] placeholder:text-gray-700 border-blue-300 border-3 placeholder:italic" required>
+                <input name="nombre_titular" type="text" placeholder="Nombre Titular" class="max-[360px]:w-[12rem] w-[16rem] text-center py-2 bg-white rounded-[10px] placeholder:text-gray-700 border-blue-300 border-3 placeholder:italic" required v-model="nombre_titular">
 
-                <input name="numero_tarjeta" type="number" placeholder="Numero Tarjeta" class="max-[360px]:w-[12rem] w-[16rem] text-center py-2 bg-white rounded-[10px] placeholder:text-gray-700 border-blue-300 border-3 placeholder:italic" required>
+                <input name="numero_tarjeta" type="number" placeholder="Numero Tarjeta" class="max-[360px]:w-[12rem] w-[16rem] text-center py-2 bg-white rounded-[10px] placeholder:text-gray-700 border-blue-300 border-3 placeholder:italic" required v-model="numero_tarjeta">
 
-                <input name="cvv" type="number" placeholder="CVV" class="max-[360px]:w-[12rem] w-[16rem] text-center py-2 bg-white rounded-[10px] placeholder:text-gray-700 border-blue-300 border-3 placeholder:italic" required>
+                <input name="cvv" type="number" placeholder="CVV" class="max-[360px]:w-[12rem] w-[16rem] text-center py-2 bg-white rounded-[10px] placeholder:text-gray-700 border-blue-300 border-3 placeholder:italic" required v-model="cvv">
 
-                <input name="mes" type="number" placeholder="Mes" class="max-[360px]:w-[12rem] w-[16rem] text-center py-2 bg-white rounded-[10px] placeholder:text-gray-700 border-blue-300 border-3 placeholder:italic" required>
+                <input name="mes" type="number" placeholder="Mes" class="max-[360px]:w-[12rem] w-[16rem] text-center py-2 bg-white rounded-[10px] placeholder:text-gray-700 border-blue-300 border-3 placeholder:italic" required v-model="mes">
 
-                <input name="year" type="number" placeholder="Año" class="max-[360px]:w-[12rem] w-[16rem] text-center py-2 bg-white rounded-[10px] placeholder:text-gray-700 border-blue-300 border-3 placeholder:italic" required>
+                <input name="year" type="number" placeholder="Año" class="max-[360px]:w-[12rem] w-[16rem] text-center py-2 bg-white rounded-[10px] placeholder:text-gray-700 border-blue-300 border-3 placeholder:italic" required v-model="year">
                 
                 
             </div>
@@ -56,6 +56,7 @@
 
 import CircleComponent from '@/components/CircleComponent.vue';
 import HomeLink from '@/components/links/HomeLink.vue';
+import { toast } from 'vue-sonner';
 export default {
     components:{
         CircleComponent,
@@ -63,7 +64,13 @@ export default {
     },
     data(){
         return {
-            house:null
+            house:null,
+            csrfToken:'',
+            nombre_titular:'',
+            numero_tarjeta:'',
+            cvv:'',
+            mes:'',
+            year:''
         }
     },
     methods:{
@@ -74,7 +81,11 @@ export default {
             })
             .then(res=>res.json())
             .then(data=>{
-                console.log(data);
+                console.log('La data:',data);
+                
+                if (!data.user) {
+                    this.$router.push('/')
+                }
                 
                 
             })
@@ -98,11 +109,67 @@ export default {
             })
             .catch(err=>{console.error(err);})
         },
-        
+        buyHouse(){
+            const body = {
+                nombre_titular: this.nombre_titular,
+                numero_tarjeta: this.numero_tarjeta,
+                cvv: this.cvv,
+                mes: this.mes,
+                year: this.year
+            }
+
+            fetch(`${process.env.VUE_APP_API_URL}/buyHouse/${this.house._id}`,{
+                method:'POST',
+                headers:{'Content-Type':'application/json', 'CSRF-Token':this.csrfToken},
+                body:JSON.stringify(body),
+                credentials:'include'
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                if (data.success) {
+                    console.log('BuyHouse ha devuelto exito');
+                    this.nombre_titular = ''
+                    this.numero_tarjeta = ''
+                    this.cvv = ''
+                    this.mes = ''
+                    this.year = ''
+
+                    toast.success(data.success)
+
+                    this.$router.push('/profile')
+                }else{
+                    console.log('BuyHouse ha devuelto error');
+                    console.log(data.error);
+                    toast.error(data.error)
+                }
+            })
+            .catch(err=>{
+                console.log('Error al hacer fetch');
+                console.log(err);
+                toast.error('Error al enviar datos')
+            })
+
+        },
+        getCSRFToken(){
+            fetch(`${process.env.VUE_APP_API_URL}/csrf-token`,{
+                method:'GET',
+                credentials:'include'
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                this.csrfToken = data.csrfToken
+            })
+            .catch(err=>{
+                console.log('Error al hacer fetch');
+                console.log(err);
+                toast.error('Error al obtener el csrfToken')
+            })
+        }
     },
     mounted(){
         this.getHouse()
-        // this.getProfile()
+        this.getProfile()
+        this.getCSRFToken()
     }
 
 
