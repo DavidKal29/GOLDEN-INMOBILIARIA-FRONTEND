@@ -62,7 +62,7 @@
                             
                             <!-- Botones con las acciones del cada casa -->
                             <div class="flex justify-center gap-4">
-                                <a target='_blank' class="cursor-pointer text-center bg-green-600 px-4 py-2 rounded text-[15px]">
+                                <a :href="`/admin/edit_house/${house._id}`" target='_blank' class="cursor-pointer text-center bg-green-600 px-4 py-2 rounded text-[15px]">
                                     Editar
                                 </a>
 
