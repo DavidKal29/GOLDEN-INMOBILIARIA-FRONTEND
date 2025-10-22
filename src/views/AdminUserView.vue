@@ -56,6 +56,11 @@
                         </p>
                     </div>
 
+                    <!-- Boton de eliminar -->
+                    <button @click="deletetUser(userData?.user?._id)" class="bg-red-500 text-white font-bold text-[15px] rounded w-[9rem] py-2 cursor-pointer truncate">
+                        Eliminar
+                    </button>
+
 
                 </div>
 
@@ -188,6 +193,32 @@ export default {
             })
             .catch(err=>{console.error(err);})
         },
+        deletetUser(id_user){
+            fetch(`${process.env.VUE_APP_API_URL}/admin/delete_user/${id_user}`,{
+                method:'GET',
+                credentials:'include'
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                if (data.success) {
+                    toast.success(data.success)
+                    
+                    this.$router.push('/admin/users')
+
+                }else{
+                    console.log(data.error);
+
+                    toast.error(data.error)
+                    
+                }
+                
+            })
+            .catch(err=>{
+                console.error(err);
+                toast.error('Error al intentar borrar al usuario')
+            })
+        },
+
     },
     mounted(){
         this.getProfile()
