@@ -76,13 +76,16 @@
                         <div
                             v-for="(house, index) in userData?.houses"
                             :key="index"
-                            class="bg-white rounded shadow-lg overflow-hidden"
+                            class="bg-white rounded shadow-lg overflow-hidden relative"
                         >
                             <img :src="house.image" alt="Inmueble" class="w-full h-48 object-cover" />
                             <div class="p-4 flex flex-col gap-2">
                                 <p class="font-semibold flex items-center"><i class="fas fa-map-marker-alt mr-2"></i>{{ house.address }}</p>
                                 <p class=" flex items-center"><i class="fas fa-euro-sign mr-2"></i>{{ house.price }}</p>
                             </div>
+                            <button @click="resetHouse(house._id)" class="flex justify-center items-center cursor-pointer bg-red-500 text-white rounded-full w-[2rem] h-[2rem] text-center absolute top-0 right-0">
+                                <i class="fa-solid fa-x "></i>
+                            </button>
                         </div>
                     </div>
 
@@ -216,6 +219,31 @@ export default {
             .catch(err=>{
                 console.error(err);
                 toast.error('Error al intentar borrar al usuario')
+            })
+        },
+        resetHouse(id_house){
+            fetch(`${process.env.VUE_APP_API_URL}/admin/reset_house/${id_house}`,{
+                method:'GET',
+                credentials:'include'
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                if (data.success) {
+                    toast.success(data.success)
+                    
+                    this.getUserData()
+
+                }else{
+                    console.log(data.error);
+
+                    toast.error(data.error)
+                    
+                }
+                
+            })
+            .catch(err=>{
+                console.error(err);
+                toast.error('Error al intentar resetear el inmueble')
             })
         },
 
