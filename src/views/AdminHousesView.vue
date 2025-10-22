@@ -70,7 +70,7 @@
                                     Comprador
                                 </a>
                                 
-                                <button @click="deleteHouse(house._id)" class="cursor-pointer text-center bg-red-600 px-4 py-2 rounded text-[15px]">
+                                <button @click="confirmation(house._id)" class="cursor-pointer text-center bg-red-600 px-4 py-2 rounded text-[15px]">
                                     Eliminar
                                 </button>
                             </div>
@@ -179,6 +179,24 @@ export default {
                 this.getHouses()
             })
         },
+        confirmation(id_house){
+            toast('¿Estás seguro de continuar?', {
+                action: {
+                    label: 'Aceptar',
+                    onClick: () => {
+                    console.log('Usuario aceptó')
+                    this.deleteHouse(id_house)
+                    },
+                },
+                cancel: {
+                    label: 'Cancelar',
+                    onClick: () => {
+                    console.log('Usuario canceló')
+                    toast.error('Acción cancelada')
+                    },
+                },
+            })
+        }
 
 
     },

@@ -57,7 +57,7 @@
                     </div>
 
                     <!-- Boton de eliminar -->
-                    <button @click="deletetUser(userData?.user?._id)" class="bg-red-500 text-white font-bold text-[15px] rounded w-[9rem] py-2 cursor-pointer truncate">
+                    <button @click="confirmation(userData?.user?._id)" class="bg-red-500 text-white font-bold text-[15px] rounded w-[9rem] py-2 cursor-pointer truncate">
                         Eliminar
                     </button>
 
@@ -83,7 +83,7 @@
                                 <p class="font-semibold flex items-center"><i class="fas fa-map-marker-alt mr-2"></i>{{ house.address }}</p>
                                 <p class=" flex items-center"><i class="fas fa-euro-sign mr-2"></i>{{ house.price }}</p>
                             </div>
-                            <button @click="resetHouse(house._id)" class="flex justify-center items-center cursor-pointer bg-red-500 text-white rounded-full w-[2rem] h-[2rem] text-center absolute top-0 right-0">
+                            <button @click="confirmReset(house._id)" class="flex justify-center items-center cursor-pointer bg-red-500 text-white rounded-full w-[2rem] h-[2rem] text-center absolute top-0 right-0">
                                 <i class="fa-solid fa-x "></i>
                             </button>
                         </div>
@@ -219,6 +219,42 @@ export default {
             .catch(err=>{
                 console.error(err);
                 toast.error('Error al intentar borrar al usuario')
+            })
+        },
+        confirmation(id_user){
+            toast('¿Estás seguro de continuar?', {
+                action: {
+                    label: 'Aceptar',
+                    onClick: () => {
+                    console.log('Usuario aceptó')
+                    this.deletetUser(id_user)
+                    },
+                },
+                cancel: {
+                    label: 'Cancelar',
+                    onClick: () => {
+                    console.log('Usuario canceló')
+                    toast.error('Acción cancelada')
+                    },
+                },
+            })
+        },
+        confirmReset(id_house){
+            toast('¿Estás seguro de continuar?', {
+                action: {
+                    label: 'Aceptar',
+                    onClick: () => {
+                    console.log('Usuario aceptó')
+                    this.resetHouse(id_house)
+                    },
+                },
+                cancel: {
+                    label: 'Cancelar',
+                    onClick: () => {
+                    console.log('Usuario canceló')
+                    toast.error('Acción cancelada')
+                    },
+                },
             })
         },
         resetHouse(id_house){

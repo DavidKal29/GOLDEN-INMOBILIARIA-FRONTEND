@@ -48,7 +48,7 @@
                                     Ver Perfil
                                 </a>
                                 
-                                <button @click="deletetUser(user._id)" class="cursor-pointer text-center bg-red-600 px-4 py-2 rounded text-[15px]">
+                                <button @click="confirmation(user._id)" class="cursor-pointer text-center bg-red-600 px-4 py-2 rounded text-[15px]">
                                     Eliminar
                                 </button>
                             </div>
@@ -157,6 +157,24 @@ export default {
                 this.getUsers()
             })
         },
+        confirmation(id_user){
+            toast('¿Estás seguro de continuar?', {
+                action: {
+                    label: 'Aceptar',
+                    onClick: () => {
+                    console.log('Usuario aceptó')
+                    this.deletetUser(id_user)
+                    },
+                },
+                cancel: {
+                    label: 'Cancelar',
+                    onClick: () => {
+                    console.log('Usuario canceló')
+                    toast.error('Acción cancelada')
+                    },
+                },
+            })
+        }
 
 
     },

@@ -61,7 +61,7 @@
                             Editar Perfil
                         </RouterLink>
 
-                        <button @click="logout" class="bg-red-500 text-white font-bold text-[15px] rounded w-[9rem] py-2 cursor-pointer truncate">
+                        <button @click="confirmation" class="bg-red-500 text-white font-bold text-[15px] rounded w-[9rem] py-2 cursor-pointer truncate">
                             Cerrar Sesión
                         </button>
                     </div>
@@ -190,6 +190,24 @@ export default {
                 
             })
             .catch(err=>{console.error(err);})
+        },
+        confirmation(){
+            toast('¿Estás seguro de continuar?', {
+                action: {
+                    label: 'Aceptar',
+                    onClick: () => {
+                    console.log('Usuario aceptó')
+                    this.logout()
+                    },
+                },
+                cancel: {
+                    label: 'Cancelar',
+                    onClick: () => {
+                    console.log('Usuario canceló')
+                    toast.error('Acción cancelada')
+                    },
+                },
+            })
         },
         getMyHouses(){
             fetch(`${process.env.VUE_APP_API_URL}/getMyHouses`,{
