@@ -70,7 +70,7 @@
                                     Comprador
                                 </a>
                                 
-                                <button class="cursor-pointer text-center bg-red-600 px-4 py-2 rounded text-[15px]">
+                                <button @click="deleteHouse(house._id)" class="cursor-pointer text-center bg-red-600 px-4 py-2 rounded text-[15px]">
                                     Eliminar
                                 </button>
                             </div>
@@ -152,7 +152,33 @@ export default {
         changeRented(bool){
             this.rented = bool
             this.getHouses()
-        }
+        },
+        deleteHouse(id_house){
+            fetch(`${process.env.VUE_APP_API_URL}/admin/delete_house/${id_house}`,{
+                method:'GET',
+                credentials:'include'
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                if (data.success) {
+                    toast.success(data.success)
+
+                }else{
+                    console.log(data.error);
+
+                    toast.error(data.error)
+                    
+                }
+                
+            })
+            .catch(err=>{
+                console.error(err);
+                toast.error('Error al intentar borrar al usuario')
+            })
+            .finally(()=>{
+                this.getHouses()
+            })
+        },
 
 
     },
