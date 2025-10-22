@@ -8,7 +8,7 @@
     <div class="flex justify-center items-center flex-col sm:flex-row p-4 gap-8 lg:gap-[5rem]">
 
         <!-- Formulario de Edit House -->
-        <form @submit.prevent="buyHouse" action="" class="bg-[#123456] rounded-[10px] flex flex-col justify-center items-center gap-8 py-8 px-4 max-[360px]:w-[18rem] w-[21rem] sm:h-[35rem] lg:h-[35rem]  xl:w-[20rem] xl:h-[35rem]">
+        <form @submit.prevent="editHouse" action="" class="bg-[#123456] rounded-[10px] flex flex-col justify-center items-center gap-8 py-8 px-4 max-[360px]:w-[18rem] w-[21rem] sm:h-[35rem] lg:h-[35rem]  xl:w-[20rem] xl:h-[35rem]">
             <p class="text-[30px] font-bold text-blue-200">EDIT HOUSE</p>
             <div class="flex flex-col gap-6">
                 
@@ -47,7 +47,7 @@
             <img :src="image" alt="" class="max-[360px]:w-[18rem] w-[21rem] h-[14rem] lg:w-[30rem] xl:w-[20rem] lg:h-[15rem] xl:h-[30rem] xl:w-[35rem] rounded-t-[10px] xl:rounded-l-[10px]">
             
             <!-- Datos de la casa -->
-            <div class="flex flex-col items-start p-4 gap-8 lg:gap-4 xl:gap-8">
+            <div class="flex flex-col items-start p-4 gap-2  xl:gap-6">
                 <span class="font-bold text-[20px] lg:text-[35px]">{{ address }}</span>
                 <p class="text-lg">N de habitaciones: {{ bedrooms }}</p>
                 <p class="text-lg">N de baños: {{ bathrooms }}</p>
@@ -136,16 +136,18 @@ export default {
             })
             .catch(err=>{console.error(err);})
         },
-        buyHouse(){
+        editHouse(){
             const body = {
-                nombre_titular: this.nombre_titular,
-                numero_tarjeta: this.numero_tarjeta,
-                cvv: this.cvv,
-                mes: this.mes,
-                year: this.year
+                address:this.address,
+                bedrooms:this.bedrooms,
+                bathrooms:this.bathrooms,
+                area_m2:this.area_m2,
+                price:this.price,
+                category:this.category,
+                image:this.image
             }
 
-            fetch(`${process.env.VUE_APP_API_URL}/buyHouse/${this.house._id}`,{
+            fetch(`${process.env.VUE_APP_API_URL}/admin/house/${this.house._id}`,{
                 method:'POST',
                 headers:{'Content-Type':'application/json', 'CSRF-Token':this.csrfToken},
                 body:JSON.stringify(body),
@@ -154,18 +156,11 @@ export default {
             .then(res=>res.json())
             .then(data=>{
                 if (data.success) {
-                    console.log('BuyHouse ha devuelto exito');
-                    this.nombre_titular = ''
-                    this.numero_tarjeta = ''
-                    this.cvv = ''
-                    this.mes = ''
-                    this.year = ''
+                    console.log('Edit House ha devuelto exito');
 
                     toast.success(data.success)
-
-                    this.$router.push('/profile')
                 }else{
-                    console.log('BuyHouse ha devuelto error');
+                    console.log('Edit House ha devuelto error');
                     console.log(data.error);
                     toast.error(data.error)
                 }
