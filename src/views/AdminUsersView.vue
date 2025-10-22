@@ -44,7 +44,7 @@
                             
                             <!-- Botones con las acciones del cada usuario -->
                             <div class="flex justify-center gap-4">
-                                <a target='_blank' class="cursor-pointer text-center bg-green-700 px-4 py-2 rounded text-[15px]">
+                                <a :href="`/admin/user/${user._id}`" target='_blank' class="cursor-pointer text-center bg-green-700 px-4 py-2 rounded text-[15px]">
                                     Ver Perfil
                                 </a>
                                 

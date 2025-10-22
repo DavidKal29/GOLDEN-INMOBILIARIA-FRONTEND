@@ -9,6 +9,7 @@ import ForgotPasswordView from '@/views/ForgotPasswordView.vue'
 import ChangePasswordView from '@/views/ChangePasswordView.vue'
 import AdminUsersView from '@/views/AdminUsersView.vue'
 import AdminHousesView from '@/views/AdminHousesView.vue'
+import AdminUserView from '@/views/AdminUserView.vue'
 
 const routes = [
   {
@@ -60,6 +61,11 @@ const routes = [
     path: '/admin/houses',
     name: 'adminHouses',
     component: AdminHousesView
+  },
+  {
+    path: '/admin/user/:id',
+    name: 'adminUser',
+    component: AdminUserView
   }
   
 ]
