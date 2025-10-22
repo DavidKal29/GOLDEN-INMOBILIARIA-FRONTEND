@@ -11,6 +11,7 @@ import AdminUsersView from '@/views/AdminUsersView.vue'
 import AdminHousesView from '@/views/AdminHousesView.vue'
 import AdminUserView from '@/views/AdminUserView.vue'
 import AdminEditHouseView from '@/views/AdminEditHouseView.vue'
+import AdminAddHouseView from '@/views/AdminAddHouseView.vue'
 
 const routes = [
   {
@@ -72,6 +73,11 @@ const routes = [
     path: '/admin/edit_house/:id',
     name: 'adminEditHouse',
     component: AdminEditHouseView
+  },
+  {
+    path: '/admin/add_house',
+    name: 'adminAddHouse',
+    component: AdminAddHouseView
   }
   
 ]

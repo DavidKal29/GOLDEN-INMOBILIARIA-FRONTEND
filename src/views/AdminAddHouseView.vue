@@ -7,8 +7,8 @@
 
     <div class="flex justify-center items-center flex-col sm:flex-row p-4 gap-8 lg:gap-[5rem]">
 
-        <!-- Formulario de Edit House -->
-        <form @submit.prevent="editHouse" action="" class="bg-[#123456] rounded-[10px] flex flex-col justify-center items-center gap-8 py-8 px-4 max-[360px]:w-[18rem] w-[21rem] sm:h-[35rem] lg:h-[35rem]  xl:w-[20rem] xl:h-[35rem]">
+        <!-- Formulario de ADD House -->
+        <form @submit.prevent="addHouse" action="" class="bg-[#123456] rounded-[10px] flex flex-col justify-center items-center gap-8 py-8 px-4 max-[360px]:w-[18rem] w-[21rem] sm:h-[35rem] lg:h-[35rem]  xl:w-[20rem] xl:h-[35rem]">
             <p class="text-[30px] font-bold text-blue-200">EDIT HOUSE</p>
             <div class="flex flex-col gap-6">
                 
@@ -37,7 +37,7 @@
                 
                 
             </div>
-            <button class="bg-red-500 text-white font-bold text-[15px] rounded w-[9rem] py-2 cursor-pointer">Editar</button>
+            <button class="bg-red-500 text-white font-bold text-[15px] rounded w-[9rem] py-2 cursor-pointer">Añadir</button>
             
         </form>
 
@@ -80,13 +80,13 @@ export default {
         return {
             house:null,
             csrfToken:'',
-            address: '',
-            bedrooms: '',
-            bathrooms: '',
-            area_m2: '',
-            price: '',
+            address: 'CALLE EJEMPLO 00, NOMBRE',
+            bedrooms: '0',
+            bathrooms: '0',
+            area_m2: '0',
+            price: '0',
             image: '',
-            category:''
+            category:'house'
         }
     },
     methods:{
@@ -111,32 +111,7 @@ export default {
             })
             .catch(err=>{console.error(err);})
         },
-        getHouse(){
-            fetch(`${process.env.VUE_APP_API_URL}/admin/house/${this.$route.params.id}`,{
-                method:'GET',
-                credentials:'include'
-            })
-            .then(res=>res.json())
-            .then(data=>{
-                if (data.house) {
-                    this.house = data.house
-                    this.address = this.house.address || ''
-                    this.bedrooms = this.house.bedrooms 
-                    this.bathrooms = this.house.bathrooms 
-                    this.area_m2 = this.house.area_m2 || ''
-                    this.price = this.house.price || ''
-                    this.image = this.house.image || ''
-                    this.category = this.house.category || ''
-
-                    console.log(data.house);
-                    
-                }else{
-                    this.$router.push('/home')
-                }    
-            })
-            .catch(err=>{console.error(err);})
-        },
-        editHouse(){
+        addHouse(){
             const body = {
                 address:this.address,
                 bedrooms:this.bedrooms,
@@ -147,7 +122,7 @@ export default {
                 image:this.image
             }
 
-            fetch(`${process.env.VUE_APP_API_URL}/admin/house/${this.house._id}`,{
+            fetch(`${process.env.VUE_APP_API_URL}/admin/add_house`,{
                 method:'POST',
                 headers:{'Content-Type':'application/json', 'CSRF-Token':this.csrfToken},
                 body:JSON.stringify(body),
@@ -156,11 +131,13 @@ export default {
             .then(res=>res.json())
             .then(data=>{
                 if (data.success) {
-                    console.log('Edit House ha devuelto exito');
+                    console.log('Add House ha devuelto exito');
 
                     toast.success(data.success)
+
+                    this.$router.push('/home')
                 }else{
-                    console.log('Edit House ha devuelto error');
+                    console.log('Add House ha devuelto error');
                     console.log(data.error);
                     toast.error(data.error)
                 }
@@ -189,7 +166,6 @@ export default {
         }
     },
     mounted(){
-        this.getHouse()
         this.getProfile()
         this.getCSRFToken()
     }

@@ -127,7 +127,7 @@
                         Inmuebles
                     </RouterLink>
 
-                    <RouterLink to="/home" class="bg-green-500 transition-colors text-white font-bold py-3 px-6 rounded-md">
+                    <RouterLink to="/admin/add_house" class="bg-green-500 transition-colors text-white font-bold py-3 px-6 rounded-md">
                         Añadir Inmueble
                     </RouterLink>
                 </div>
