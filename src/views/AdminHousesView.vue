@@ -38,6 +38,7 @@
                         <th class="px-4 py-3 text-[20px] md:text-[25px] font-bold text-center">Baños</th>
                         <th class="px-4 py-3 text-[20px] md:text-[25px] font-bold text-center">Área</th>
                         <th class="px-4 py-3 text-[20px] md:text-[25px] font-bold text-center">Precio</th>
+                        <th class="px-4 py-3 text-[20px] md:text-[25px] font-bold text-center">ID User</th>
                         <th class="px-4 py-3 text-[20px] md:text-[25px] font-bold text-center">Acciones</th>
                     </tr>
                 </thead>
@@ -56,12 +57,17 @@
                         <td class="px-4 py-3 text-[16px] md:text-[18px] font-semibold text-center">{{ house.bathrooms }}</td>
                         <td class="px-4 py-3 text-[16px] md:text-[18px] font-semibold text-center">{{ house.area_m2 }} m2</td>
                         <td class="px-4 py-3 text-[16px] md:text-[18px] font-semibold text-center">{{ house.price }} €</td>
+                        <td class="px-4 py-3 text-[16px] md:text-[18px] font-semibold text-center">{{ house.id_user || 'No tiene' }}</td>
                         <td class="px-4 py-3 text-[16px] md:text-[18px] font-semibold text-center">
                             
                             <!-- Botones con las acciones del cada casa -->
                             <div class="flex justify-center gap-4">
                                 <a target='_blank' class="cursor-pointer text-center bg-green-600 px-4 py-2 rounded text-[15px]">
                                     Editar
+                                </a>
+
+                                <a v-if="house?.id_user" :href="`/admin/user/${house.id_user}`" target='_blank' class="cursor-pointer text-center bg-blue-600 px-4 py-2 rounded text-[15px]">
+                                    Comprador
                                 </a>
                                 
                                 <button class="cursor-pointer text-center bg-red-600 px-4 py-2 rounded text-[15px]">
