@@ -34,7 +34,7 @@
             <img :src="house?.image" alt="" class="max-[360px]:w-[18rem] w-[21rem] h-[14rem] lg:w-[30rem] xl:w-[20rem] lg:h-[15rem] xl:h-[30rem] xl:w-[35rem] rounded-t-[10px] xl:rounded-l-[10px]">
             
             <!-- Datos de la casa -->
-            <div class="flex flex-col items-start p-4 gap-8 lg:gap-4 xl:gap-8">
+            <div class="flex flex-col items-start p-4 gap-4 lg:gap-4 xl:gap-8">
                 <span class="font-bold text-[20px] lg:text-[35px]">{{ house?.address }}</span>
                 <p class="text-lg">N de habitaciones: {{ house?.bedrooms }}</p>
                 <p class="text-lg">N de baños: {{ house?.bathrooms }}</p>
