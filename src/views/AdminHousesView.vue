@@ -203,6 +203,7 @@ export default {
     mounted(){
         this.getProfile()
         this.getHouses()
+        document.title = 'All Houses'
     }
 
 }

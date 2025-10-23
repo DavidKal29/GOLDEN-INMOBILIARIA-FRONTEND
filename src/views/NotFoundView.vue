@@ -1,6 +1,6 @@
 <template>
   <div
-    class="min-h-screen w-full flex flex-col items-center justify-start relative overflow-hidden gap-12 md:gap-24"
+    class="min-h-screen w-full flex flex-col items-center justify-start relative overflow-hidden"
   >
     <div class="flex justify-center items-center p-6 top-0">
         <HomeLink></HomeLink>
@@ -15,6 +15,7 @@
       <h2 class="text-[40px] md:text-4xl font-semibold mb-4">
         Página no encontrada
       </h2>
+      <img class="w-1/2" src="/NotFoundImage.webp" alt="">
       <p class="text-[20px] text-center max-w-xl">
         Lo sentimos, la página que buscas no existe o ha sido movida.  
         Vuelve al inicio cuando quieras.
@@ -30,6 +31,9 @@ export default {
   name: 'NotFound',
   components: {
     HomeLink
+  },
+  mounted(){
+    document.title = '404 Not Found'
   }
 }
 </script>

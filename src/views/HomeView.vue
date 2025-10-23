@@ -93,6 +93,7 @@ export default {
     mounted(){
         this.getHouses()
         this.getProfile()
+        document.title = 'Home'
     }
 };
 </script>

@@ -192,6 +192,7 @@ export default {
         this.getHouse()
         this.getProfile()
         this.getCSRFToken()
+        document.title = 'Edit House'
     }
 
 

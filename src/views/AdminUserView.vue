@@ -287,6 +287,7 @@ export default {
     mounted(){
         this.getProfile()
         this.getUserData()
+        document.title = 'User Profile'
     }
 };
 </script>

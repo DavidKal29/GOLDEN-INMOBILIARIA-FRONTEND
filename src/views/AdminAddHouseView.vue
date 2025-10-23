@@ -168,6 +168,7 @@ export default {
     mounted(){
         this.getProfile()
         this.getCSRFToken()
+        document.title = 'Add House'
     }
 
 

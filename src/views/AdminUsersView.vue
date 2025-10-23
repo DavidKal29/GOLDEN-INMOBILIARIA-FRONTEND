@@ -181,6 +181,7 @@ export default {
     mounted(){
         this.getProfile()
         this.getUsers()
+        document.title = 'All Users'
     }
 
 }

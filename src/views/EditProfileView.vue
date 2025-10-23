@@ -125,6 +125,7 @@ export default {
     mounted(){
         this.getCSRFToken()
         this.getProfile()
+        document.title = 'Edit Profile'
     }
 
 }
