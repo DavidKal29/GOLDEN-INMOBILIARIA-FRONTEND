@@ -12,6 +12,7 @@ import AdminHousesView from '@/views/AdminHousesView.vue'
 import AdminUserView from '@/views/AdminUserView.vue'
 import AdminEditHouseView from '@/views/AdminEditHouseView.vue'
 import AdminAddHouseView from '@/views/AdminAddHouseView.vue'
+import NotFoundView from '@/views/NotFoundView.vue'
 
 const routes = [
   {
@@ -78,6 +79,11 @@ const routes = [
     path: '/admin/add_house',
     name: 'adminAddHouse',
     component: AdminAddHouseView
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'notFound',
+    component: NotFoundView
   }
   
 ]
