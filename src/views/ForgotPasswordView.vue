@@ -9,7 +9,7 @@
 
         <!-- Formulario de Forgot Password -->
         <form @submit.prevent="sendEmail" action="" class="bg-[#123456] rounded-[10px] flex flex-col justify-center items-center gap-16 py-8 px-4 xl:w-[20rem] xl:h-[30rem]">
-            <p class="text-[30px] font-bold text-blue-200">FORGOTEEN</p>
+            <p class="text-[30px] font-bold text-blue-200">FORGOTTEN</p>
             <div class="flex flex-col gap-8">
                 
                 <input name="email" type="email" placeholder="Email" class="max-[360px]:w-[12rem] w-[16rem] text-center py-2 bg-white rounded-[10px] placeholder:text-gray-700 border-blue-300 border-3 placeholder:italic" v-model="email" required>
