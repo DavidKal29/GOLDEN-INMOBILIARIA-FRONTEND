@@ -8,7 +8,7 @@
     <div class="flex justify-center items-center flex-col sm:flex-row p-4 gap-8 lg:gap-[5rem]">
 
         <!-- Formulario de ADD House -->
-        <form @submit.prevent="addHouse" action="" class="bg-[#123456] rounded-[10px] flex flex-col justify-center items-center gap-8 py-8 px-4 max-[360px]:w-[18rem] w-[21rem] sm:h-[35rem] lg:h-[35rem]  xl:w-[20rem] xl:h-[35rem]">
+        <form autocomplete="off" @submit.prevent="addHouse" action="" class="bg-[#123456] rounded-[10px] flex flex-col justify-center items-center gap-8 py-8 px-4 max-[360px]:w-[18rem] w-[21rem] sm:h-[35rem] lg:h-[35rem]  xl:w-[20rem] xl:h-[35rem]">
             <p class="text-[30px] font-bold text-blue-200">ADD HOUSE</p>
             <div class="flex flex-col gap-6">
                 

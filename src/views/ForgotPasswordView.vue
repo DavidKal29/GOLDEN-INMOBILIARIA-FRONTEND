@@ -8,7 +8,7 @@
     <div class="flex justify-center itmes-stretch flex-col sm:flex-row p-4 gap-8 xl:gap-[5rem]">
 
         <!-- Formulario de Forgot Password -->
-        <form @submit.prevent="sendEmail" action="" class="bg-[#123456] rounded-[10px] flex flex-col justify-center items-center gap-16 py-8 px-4 xl:w-[20rem] xl:h-[30rem]">
+        <form autocomplete="off" @submit.prevent="sendEmail" action="" class="bg-[#123456] rounded-[10px] flex flex-col justify-center items-center gap-16 py-8 px-4 xl:w-[20rem] xl:h-[30rem]">
             <p class="text-[30px] font-bold text-blue-200">FORGOTTEN</p>
             <div class="flex flex-col gap-8">
                 
